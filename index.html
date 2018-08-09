@@ -1,0 +1,107 @@
+<!DOCTYPE html >
+<!-- ArcGIS REST API Dataviz -->
+<html>
+<head>
+    <title>Query ArcGIS REST API data Into Dataviz</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://canvg.github.io/canvg/canvg.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <script src="https://js.arcgis.com/3.25/"></script>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.25/esri/css/esri.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="QueryDataCSS.css" type="text/css">
+
+</head>
+<head>
+    <div id="barChart">
+        <!--width and height of graph -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             id=barsvg width="920" height="460"></svg>
+    </div>
+</head>
+<br>
+<br>
+<br>
+<br>
+<body>
+
+<div class="grid-container">
+
+    <form class="form-style-7">
+        <body>
+        <h1>Fill Form</h1>
+        <ul>
+
+            <div id="Inputs">
+                <!-- Insert URL -->
+                <li>
+                    <label for="APIInput">ArcGIS Rest API</label>
+                    <input type="text" id="APIInput" value="https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5">
+                    <span id="status">Enter your url here</span>
+
+                </li>
+
+                <li>
+                    <label for="DisplayField">Display Field</label>
+                    <input type="text" id="DisplayField" value="New York">
+                    <span>Enter your services display field here</span>
+                </li>
+
+                <li>
+                    <label for="xUserInput">X-axis</label>
+                    <input type="text" id="xUserInput"
+                           value=" age_5_17, age_18_21, age_22_29, age_30_39, age_40_49, age_50_64, age_65_up">
+                    <span>Enter your X-axis values here</span>
+                </li>
+
+                <li>
+                    <label for="title">Graph Title</label>
+                    <input id="title" type="text" name="title" value=" Sample Title">
+                    <span>Enter your title here</span>
+                </li>
+
+
+                </li>
+                <form action="/action_page.php">
+                    Label:<br>
+                    <input type="radio" name="gender" value="on" onclick="UpdateChart()" checked> On<br>
+                    <input type="radio" name="gender" value="off" onclick="clearText()"> Off<br>
+                </form>
+                </li>
+
+                <input id="execute" type="button" value="Get Details" onclick="xValues(),APIValue(), writeTitle()">
+                <input type="button" value="Clear Chart" onclick="clearChart();UpdateChart();">
+                <a id="download" href="#">Download SVG</button></a>
+
+                <br>
+            </div>
+
+        </ul>
+
+        <!--
+            <div>
+                <p>Click the button to create a Color picker.</p>
+                <button onclick="ColorFunction()">Color Selector</button>
+            </div>
+            -->
+        <script type="text/javascript" src="QueryDataJS.js"></script>
+        </body>
+
+
+    </form>
+</div>
+
+</head>
+
+<h1 id="IHead">Content</h1>
+<p id="IContentInfo">Your selected ArcGIS Service info. Here we'll display Field names, aliases and types:</p>
+<textarea id="content"></textarea>
+
+
+</body>
